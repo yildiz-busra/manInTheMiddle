@@ -1,9 +1,9 @@
-import scapy.all as scapy
+import scapy
 import optparse
 
 def getUserInput():
     parseObject = optparse.OptionParser()
-    parseObject.add_option("-t", "--target", dest="ipAddress", help="target IP address to scan")
+    parseObject.add_option("-i", "--ipaddress", dest="ipAddress", help="target IP address to scan")
     return parseObject.parse_args()
 
 def scanNetwork(ipAddress):
