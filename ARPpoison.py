@@ -1,5 +1,5 @@
 import subprocess
-import scapy
+import scapy.all as scapy
 import time
 import optparse
 
@@ -9,10 +9,8 @@ def ipForward():
 
 def getUserInput():
     parseObject = optparse.OptionParser()
-
     parseObject.add_option("-i", "--ipaddress",dest="targetIP",help="Enter Target IP")
     parseObject.add_option("-g","--gateway",dest="gatewayIP",help="Enter Gateway IP")
-
     options = parseObject.parse_args()[0]
 
     if not options.targetIP:
