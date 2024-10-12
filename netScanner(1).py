@@ -1,4 +1,4 @@
-import scapy.all as scapy
+import scapy
 import optparse
 
 def getUserInput():
