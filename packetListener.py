@@ -1,11 +1,12 @@
 import scapy.all as scapy
-from scapy_http import http
+from scapy.layers import http
 import optparse
 
 def getUserInput():
     parseObject = optparse.OptionParser()
-    parseObject.add_option("-i", "--interface", dest="interface", help="Network interface to listen")
-    return parseObject.parse_args()
+    parseObject.add_option("-i", "--interface", dest="interface", help="Network interface to listen")  
+    (options, arguments) = parseObject.parse_args()
+    return options
 
 def packetSniff(interface):
 
@@ -13,9 +14,7 @@ def packetSniff(interface):
 
 def packetAnalyze(packet):
 
-    if packet.haslayer(http.HTTPRequest):
-        if packet.haslayer(scapy.Raw):
-            print(packet[scapy.Raw].load)
+    packet.show()
 
 userInput = getUserInput()
 packetSniff(userInput.interface)
