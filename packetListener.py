@@ -14,7 +14,14 @@ def packetSniff(interface):
 
 def packetAnalyze(packet):
 
-    packet.show()
+    if packet.haslayer(http.HTTPRequest):
+
+        url = packet[http.HTTPRequest].Host.decode() + packet[http.HTTPRequest].Path.decode()
+        print(f"[+] HTTP Request >> {url}")   
+
+        if packet.haslayer(scapy.Raw):
+            load = packet[scapy.Raw].load.decode(errors='ignore')
+            print(f"[+] Data: {load}")
 
 userInput = getUserInput()
 packetSniff(userInput.interface)
